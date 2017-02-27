@@ -11,7 +11,7 @@ config.General.transferLogs = True
 config.section_("JobType")
 config.JobType.pluginName  = 'Analysis'
 # Name of the CMSSW configuration file
-config.JobType.psetName    = 'aodsim_cfg.py'
+config.JobType.psetName    = 'test/aodsim_RunIISpring16DR80_cfg.py'
 # config.JobType.pyCfgParams = ['crab=1']
 # config.JobType.scriptArgs  = ''
 config.JobType.maxMemoryMB = 4000

@@ -20,7 +20,8 @@ def execute(args):
     return p
     print '################################'
 
-dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim.txt')
+dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-02-16.txt')
+# Run only mass_X_d_1000 datasets
 dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() if k[0] == '1000' }
 
 jobdirname = 'jobs'
@@ -40,7 +41,7 @@ for key, val in dataset_dict_filtered.items():
 
     kwdict_crab = {}
     kwdict_crab['jobname'] = jobname
-    kwdict_crab['datasettag'] = 'AODSIM'
+    kwdict_crab['datasettag'] = 'AODSIM-2017-02-20'
     kwdict_crab['filesperjob'] = 1
     kwdict_crab['totalfiles'] = 10000
     kwdict_crab['lfndirbase'] = '/store/user/yoshin/EmJetMC/AODSIM/'
