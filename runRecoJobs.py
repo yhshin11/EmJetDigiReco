@@ -49,12 +49,15 @@ for key, val in dataset_dict_filtered.items():
     if not os.path.exists(os.path.join(jobdirname, jobname)):
         os.makedirs(os.path.join(jobdirname, jobname))
 
+    # Tag for output dataset to avoid collision
+    tagname = 'v2017-02-20'
     kwdict_crab = {}
     kwdict_crab['jobname'] = jobname
-    kwdict_crab['datasettag'] = 'AODSIM-2017-02-20'
+    kwdict_crab['datasettag'] = 'AODSIM-' + tagname
+    if testing: kwdict_crab['datasettag'] += '-test'
     kwdict_crab['filesperjob'] = 1
     kwdict_crab['totalfiles'] = 10000
-    kwdict_crab['lfndirbase'] = '/store/user/yoshin/EmJetMC/AODSIM/'
+    kwdict_crab['lfndirbase'] = '/store/user/yoshin/EmJetMC/AODSIM/%s/' % tagname
     if testing: kwdict_crab['lfndirbase'] += 'test/'
     kwdict_crab['storagesite'] = 'T3_US_UMD'
     kwdict_crab['inputdataset'] = inputdataset
