@@ -8,7 +8,7 @@ from dataset_management.parse_datasets_emjet import get_dataset_dict
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('-t', '--testing', action='store_true')
+parser.add_argument('-t', '--testing', action='store_true', help='Enable testing mode. Submits single dataset.')
 args = parser.parse_args()
 testing = args.testing
 print testing
