@@ -6,6 +6,13 @@ from collections import OrderedDict
 from pprint import pprint
 from dataset_management.parse_datasets_emjet import get_dataset_dict
 
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-t', '--testing', action='store_true')
+args = parser.parse_args()
+testing = args.testing
+print testing
+
 def getjobname_fromstring(mass_X_d, mass_pi_d, tau_pi_d):
     jobname = 'mass_X_d_%s_mass_pi_d_%s_tau_pi_d_%s' % (mass_X_d, mass_pi_d, tau_pi_d)
     return jobname
@@ -20,9 +27,12 @@ def execute(args):
     return p
     print '################################'
 
+# Get dataset dictionary in form: { (mass_X_d, mass_pi_d, tau_pi_d) : dataset_name }
 dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-02-16.txt')
 # Run only mass_X_d_1000 datasets
 dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() if k[0] == '1000' }
+if testing:
+    dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() if k[0] == '1000' and k[1] == '2' and k[2] == '5' }
 
 jobdirname = 'jobs'
 crabconfigname = 'crabConfig.py'
@@ -45,6 +55,7 @@ for key, val in dataset_dict_filtered.items():
     kwdict_crab['filesperjob'] = 1
     kwdict_crab['totalfiles'] = 10000
     kwdict_crab['lfndirbase'] = '/store/user/yoshin/EmJetMC/AODSIM/'
+    if testing: kwdict_crab['lfndirbase'] += 'test/'
     kwdict_crab['storagesite'] = 'T3_US_UMD'
     kwdict_crab['inputdataset'] = inputdataset
 

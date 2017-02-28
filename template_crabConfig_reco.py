@@ -11,10 +11,11 @@ config.General.transferLogs = True
 config.section_("JobType")
 config.JobType.pluginName  = 'Analysis'
 # Name of the CMSSW configuration file
-config.JobType.psetName    = 'test/aodsim_RunIISpring16DR80_cfg.py'
+config.JobType.psetName    = 'test/aodsim-RunIISummer16DR80Premix_cfg.py'
 # config.JobType.pyCfgParams = ['crab=1']
 # config.JobType.scriptArgs  = ''
 config.JobType.maxMemoryMB = 4000
+config.JobType.numCores = 4
 
 config.section_("Data")
 config.Data.inputDBS = 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSReader'
