@@ -28,7 +28,8 @@ def execute(args):
     print '################################'
 
 # Get dataset dictionary in form: { (mass_X_d, mass_pi_d, tau_pi_d) : dataset_name }
-dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-02-16.txt')
+# dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-04-30.txt')
+dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-04-30b.txt')
 # Run only mass_X_d_1000 datasets
 dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() if k[0] == '1000' }
 if testing:
@@ -50,10 +51,10 @@ for key, val in dataset_dict_filtered.items():
         os.makedirs(os.path.join(jobdirname, jobname))
 
     # Tag for output dataset to avoid collision
-    tagname = 'v2017-02-20'
+    tagname = 'v2017-05-02'
     kwdict_crab = {}
     kwdict_crab['jobname'] = jobname
-    kwdict_crab['datasettag'] = 'AODSIM-' + tagname
+    kwdict_crab['datasettag'] = 'RunIISummer16DR80Premix_private-AODSIM-' + tagname
     if testing: kwdict_crab['datasettag'] += '-test'
     kwdict_crab['filesperjob'] = 1
     kwdict_crab['totalfiles'] = 10000
