@@ -28,7 +28,7 @@ def execute(args):
     print '################################'
 
 # Get dataset dictionary in form: { (mass_X_d, mass_pi_d, tau_pi_d) : dataset_name }
-dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-09-06.txt')
+dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-09-06b.txt')
 run_filtered_only = 1
 if not run_filtered_only:
     # Run all datasets
@@ -58,7 +58,7 @@ for key, val in dataset_dict_filtered.items():
         os.makedirs(os.path.join(jobdirname, jobname))
 
     # Tag for output dataset to avoid collision
-    tagname = 'v2017-09-11'
+    tagname = 'v2017-09-11b'
     kwdict_crab = {}
     kwdict_crab['jobname'] = jobname
     kwdict_crab['requestname'] =  'EmJetSignalMCReco'
@@ -66,9 +66,11 @@ for key, val in dataset_dict_filtered.items():
     if testing: kwdict_crab['datasettag'] += '-test'
     kwdict_crab['filesperjob'] = 1
     kwdict_crab['totalfiles'] = 10000
-    kwdict_crab['lfndirbase'] = '/store/user/yoshin/EmJetMC/AODSIM/%s/' % tagname
+    # kwdict_crab['lfndirbase'] = '/store/user/yoshin/EmJetMC/AODSIM/%s/' % tagname
+    kwdict_crab['lfndirbase'] = '/store/user/eno/EmJetMC/AODSIM/%s/' % tagname
     if testing: kwdict_crab['lfndirbase'] += 'test/'
-    kwdict_crab['storagesite'] = 'T3_US_UMD'
+    # kwdict_crab['storagesite'] = 'T3_US_UMD'
+    kwdict_crab['storagesite'] = 'T3_US_FNALLPC'
     kwdict_crab['inputdataset'] = inputdataset
 
     crabconfigtemplate = open('template_crabConfig_reco.py', 'r')
