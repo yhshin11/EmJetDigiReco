@@ -28,15 +28,22 @@ def execute(args):
     print '################################'
 
 # Get dataset dictionary in form: { (mass_X_d, mass_pi_d, tau_pi_d) : dataset_name }
-# dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-04-30.txt')
-dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-04-30b.txt')
-# Run only mass_X_d_1000 datasets
-dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() if k[0] == '1000' }
+dataset_dict = get_dataset_dict('dataset_management/datasets_emjet_gensim_2017-09-06.txt')
+run_filtered_only = 1
+if not run_filtered_only:
+    # Run all datasets
+    dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() }
+else:
+    # Run only mass_X_d_1000 datasets
+    dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() if k[0] != '1000' }
 if testing:
     dataset_dict_filtered = { k:v for (k,v) in dataset_dict.items() if k[0] == '1000' and k[1] == '2' and k[2] == '5' }
 
 jobdirname = 'jobs'
 crabconfigname = 'crabConfig.py'
+
+for key, val in dataset_dict_filtered.items():
+    print key, val
 
 for key, val in dataset_dict_filtered.items():
     ########################################
@@ -51,9 +58,10 @@ for key, val in dataset_dict_filtered.items():
         os.makedirs(os.path.join(jobdirname, jobname))
 
     # Tag for output dataset to avoid collision
-    tagname = 'v2017-05-02'
+    tagname = 'v2017-09-11'
     kwdict_crab = {}
     kwdict_crab['jobname'] = jobname
+    kwdict_crab['requestname'] =  'EmJetSignalMCReco'
     kwdict_crab['datasettag'] = 'RunIISummer16DR80Premix_private-AODSIM-' + tagname
     if testing: kwdict_crab['datasettag'] += '-test'
     kwdict_crab['filesperjob'] = 1
